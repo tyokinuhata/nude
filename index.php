@@ -59,14 +59,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             Name: <input type="text" name="name"><br>
             <?php if (isset($errors['name'])): ?>
                 <ul>
-                    <li><?= $errors['name'] ?></li>
+                    <li><?= htmlspecialchars($errors['name'], ENT_QUOTES, 'UTF-8') ?></li>
                 </ul>
             <?php endif; ?>
 
             Comment: <input type="text" name="comment" size="60"><br>
             <?php if (isset($errors['comment'])): ?>
                 <ul>
-                    <li><?= $errors['comment'] ?></li>
+                    <li><?= htmlspecialchars($errors['comment'], ENT_QUOTES, 'UTF-8') ?></li>
                 </ul>
             <?php endif; ?>
             <input type="submit" name="submit" value="Send">
