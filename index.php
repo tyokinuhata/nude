@@ -95,8 +95,8 @@ $sqlite = null;
             <?php foreach ($posts as $post): ?>
                 <li>
                     <?= htmlspecialchars($post['name'], ENT_QUOTES, 'UTF-8') ?>:
-                    <?= htmlspecialchars($post['comment'], ENT_QUOTES, 'UTF-8') ?>
-                    <?= htmlspecialchars($post['created_at'], ENT_QUOTES, 'UTF-8') ?> -
+                    <?= htmlspecialchars($post['comment'], ENT_QUOTES, 'UTF-8') ?> -
+                    <?= htmlspecialchars($post['created_at'], ENT_QUOTES, 'UTF-8') ?>
                 </li>
             <?php endforeach; ?>
         </ul>
