@@ -1,5 +1,22 @@
 <?php
 
+// DB接続
+try {
+    $sqlite = new PDO("sqlite:./database/database.sqlite");
+} catch (PDOException $e) {
+    echo $e->getMessage();
+    die();
+}
+
+// 投稿の取得処理
+try {
+    $sql = 'SELECT * FROM `post` ORDER BY `created_at` DESC';
+    $posts = $sqlite->query($sql);
+} catch (PDOException $e) {
+    echo $e->getMessage();
+    die();
+}
+
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -29,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // 保存処理
     if (count($errors) === 0) {
         try {
-            $sqlite = new PDO("sqlite:./database/database.sqlite");
             $sql = $sqlite->prepare('INSERT INTO `post` (
                 `name`, `comment`, `created_at`
             ) VALUES (
@@ -45,6 +61,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+// DB切断
+$sqlite = null;
 
 ?>
 <!DOCTYPE html>
@@ -71,5 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php endif; ?>
             <input type="submit" name="submit" value="Send">
         </form>
+
+        <ul>
+            <?php foreach ($posts as $post): ?>
+                <li>
+                    <?= htmlspecialchars($post['name'], ENT_QUOTES, 'UTF-8') ?>:
+                    <?= htmlspecialchars($post['comment'], ENT_QUOTES, 'UTF-8') ?>
+                    <?= htmlspecialchars($post['created_at'], ENT_QUOTES, 'UTF-8') ?> -
+                </li>
+            <?php endforeach; ?>
+        </ul>
     </body>
 </html>
