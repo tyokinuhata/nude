@@ -4,5 +4,5 @@
 ### 鯖の起動
 
 ```bash
-php -S localhost:8000
+php -S localhost:8000 -t /web
 ```
