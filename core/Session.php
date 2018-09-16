@@ -34,7 +34,7 @@ class Session
         $_SESSION = [];
     }
 
-    public function Regenerate($destroy = true)
+    public function regenerate($destroy = true)
     {
         if (!self::$sessionIdRegenerated) {
             session_regenerate_id($destroy);
