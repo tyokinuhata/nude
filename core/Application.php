@@ -89,4 +89,50 @@ abstract class Application
     {
         return $this->getRootDir() . '/web';
     }
+
+    public function run()
+    {
+        $params = $this->router->resolve($this->request->getPathInfo());
+        if ($params === false) {
+            // TODO
+        }
+
+        $controller = $params['controller'];
+        $action = $params['action'];
+
+        $this->runAction($controller, $action, $params);
+        $this->response->send();
+    }
+
+    public function runAction($controllerName, $action, $params = [])
+    {
+        $controllerClass = ucfirst($controllerName) . 'Controller';
+
+        $controller = $this->findController($controllerClass);
+        if ($controller === false) {
+            // TODO
+        }
+
+        $content = $controller->run($action, $params);
+        $this->response->setContent($content);
+    }
+
+    protected function findController($controllerClass)
+    {
+        if (!class_exists($controllerClass)) {
+            $controllerFile = $this->getControlDir() . '/' . $controllerClass . '.php';
+
+            if (!is_readable($controllerFile)) {
+                return false;
+            } else {
+                require_once $controllerFile;
+
+                if (!class_exists($controllerClass)) {
+                    return false;
+                }
+            }
+        }
+
+        return new $controllerClass($this);
+    }
 }
