@@ -33,5 +33,20 @@ abstract class Controller
         return $content;
     }
 
+    protected function render($variables = [], $template = null, $layout = 'layout')
+    {
+        $defaults = [
+            'request' => $this->request,
+            'baseUrl' => $this->request->getBaseUrl(),
+            'session' => $this->session,
+        ];
 
+        $view = new View($this->application->getViewDir(), $defaults);
+
+        if (is_null($template)) $template = $this->actionName;
+
+        $path = $this->controllerName . '/' . $template;
+
+        return $view->render($path, $variables, $layout);
+    }
 }
