@@ -9,6 +9,7 @@ abstract class Controller
     protected $response;
     protected $session;
     protected $dbManager;
+    protected $authActions = [];
 
     public function __construct($application)
     {
@@ -27,6 +28,8 @@ abstract class Controller
 
         $actionMethod = $action . 'Action';
         if (!method_exists($this, $actionMethod)) $this->forward404();
+
+        if ($this->needsAuthentication($action) && !$this->session->isAuthenticated()) throw new UnauthorizedActionException();
 
         $content = $this->$actionMethod($params);
 
@@ -88,12 +91,18 @@ abstract class Controller
         $key = 'csrf_tokens/' . $formName;
         $tokens = $this->session->get($key, []);
 
-        if (($pos = array_search($token, $tokens, true))) {
+        if (($pos = array_search($token, $tokens, true)) !== false) {
             unset($tokens[$pos]);
             $this->session->set($key, $tokens);
 
             return true;
         }
+        return false;
+    }
+
+    protected function needsAuthentication($action)
+    {
+        if ($this->authActions === true || (is_array($this->authActions) && in_array($action, $this->authActions))) return true;
         return false;
     }
 }
