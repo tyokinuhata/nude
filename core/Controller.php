@@ -68,4 +68,32 @@ abstract class Controller
         $this->response->setStatusCode(302, 'Found');
         $this->response->setHttpHeader('Location', $url);
     }
+
+    protected function generateCsrfToken($formName)
+    {
+        $key = 'csrf_tokens/' . $formName;
+        $tokens = $this->session->get($key, []);
+        if (count($tokens) >= 10) array_shift($tokens);
+
+        $token = sha1($formName . session_id() . microtime());
+        $tokens = $token;
+
+        $this->session->set($key, $tokens);
+
+        return $token;
+    }
+
+    protected function checkCsrfToken($formName, $token)
+    {
+        $key = 'csrf_tokens/' . $formName;
+        $tokens = $this->session->get($key, []);
+
+        if (($pos = array_search($token, $tokens, true))) {
+            unset($tokens[$pos]);
+            $this->session->set($key, $tokens);
+
+            return true;
+        }
+        return false;
+    }
 }
