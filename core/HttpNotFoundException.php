@@ -2,5 +2,5 @@
 
 class HttpNotFoundException extends Exception
 {
-
+    //
 }
