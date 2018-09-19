@@ -6,3 +6,9 @@
 ```bash
 php -S localhost:8000 -t public
 ```
+
+### マイグレーション
+
+```bash
+php database/command.php
+```

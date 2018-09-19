@@ -22,13 +22,9 @@ class UserMigration extends Migration
 
         try {
             $this->sqlite->exec($sql);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             echo $e->getMessage();
             die();
         }
     }
 }
-
-$user = new UserMigration();
-$user->create();
-$user->close();

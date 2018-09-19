@@ -24,8 +24,8 @@ abstract class Migration
     public function connect()
     {
         try {
-            $this->sqlite = new PDO("sqlite:{$this->fileName}");
-        } catch(PDOException $e) {
+            $this->sqlite = new \PDO("sqlite:{$this->fileName}");
+        } catch(\PDOException $e) {
             echo $e->getMessage();
             die();
         }
@@ -50,8 +50,8 @@ abstract class Migration
     public function delete()
     {
         try {
-            $file = new SplFileObject($this->fileName, 'wb');
-        } catch (Exception $e) {
+            $file = new \SplFileObject($this->fileName, 'wb');
+        } catch (\Exception $e) {
             echo $e->getMessage();
             die();
         }
