@@ -2,6 +2,6 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$user = new Database\UserMigration();
+$user = new Database\Migrations\UserMigration();
 $user->create();
 $user->close();
