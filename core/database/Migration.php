@@ -4,17 +4,14 @@ namespace Core\Database;
 
 abstract class Migration
 {
-    protected $fileName;
-    protected $sqlite;
+    protected $databaseSource = __DIR__ . '/../../database/database.sqlite';
+    protected $databaseHandle;
 
     /**
-     * CreateDatabase constructor.
-     * @param string $fileName
-     * DBにするファイル名の指定
+     * Migration constructor.
      */
-    function __construct($fileName)
+    function __construct()
     {
-        $this->fileName = $fileName;
         $this->connect();
     }
 
@@ -24,7 +21,7 @@ abstract class Migration
     public function connect()
     {
         try {
-            $this->sqlite = new \PDO("sqlite:{$this->fileName}");
+            $this->databaseHandle = new \PDO('sqlite:' . $this->databaseSource);
         } catch(\PDOException $e) {
             echo $e->getMessage();
             die();
@@ -36,7 +33,7 @@ abstract class Migration
      */
     public function close()
     {
-        $this->sqlite = null;
+        $this->databaseHandle = null;
     }
 
     /**
@@ -50,7 +47,7 @@ abstract class Migration
     public function delete()
     {
         try {
-            $file = new \SplFileObject($this->fileName, 'wb');
+            $file = new \SplFileObject($this->databaseSource, 'wb');
         } catch (\Exception $e) {
             echo $e->getMessage();
             die();

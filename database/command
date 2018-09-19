@@ -1,0 +1,38 @@
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+// ネームスペース
+$namespace = 'Database\Migrations\\';
+
+// オプションの取得
+$options = getopt('a:c:');
+
+// 実行するメソッド
+if (isset($options['a'])) $action = $options['a'];
+else throw new Exception();
+
+// クラス
+if (isset($options['c'])) $class = $options['c'];
+else $class = false;
+
+// 特定クラスのマイグレーションのみ実行
+if ($class) {
+    $namespace = $namespace . $class;
+    $migration = new $namespace();
+    $migration->$action();
+    $migration->close();
+}
+
+// 全てのマイグレーションを実行する
+//} else {
+//    $files = scandir(__DIR__ . '/migrations');
+//    $files = preg_grep('/\.php/', $files);
+//    foreach ($files as $file) {
+//        $class = str_replace('.php', '', $file);
+//        echo $class;
+////            $migration = new $namespace . $class();
+////            $migration->$action();
+////            $migration->close();
+//    }
+//}

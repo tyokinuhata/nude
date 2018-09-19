@@ -6,9 +6,9 @@ use Core\Database\Migration;
 
 class UserMigration extends Migration
 {
-    function __construct($fileName = 'database.sqlite')
+    function __construct()
     {
-        parent::__construct($fileName);
+        parent::__construct();
     }
 
     public function create()
@@ -21,7 +21,7 @@ class UserMigration extends Migration
 	    )';
 
         try {
-            $this->sqlite->exec($sql);
+            $this->databaseHandle->exec($sql);
         } catch (\PDOException $e) {
             echo $e->getMessage();
             die();
