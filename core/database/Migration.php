@@ -22,8 +22,10 @@ abstract class Migration
     {
         try {
             $this->databaseHandle = new \PDO('sqlite:' . $this->databaseSource);
+            $this->databaseHandle->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch(\PDOException $e) {
             echo $e->getMessage();
+            echo $e->getTraceAsString();
             die();
         }
     }
@@ -37,25 +39,12 @@ abstract class Migration
     }
 
     /**
-     * テーブルの作成
+     * マイグレーション実行時
      */
-    abstract public function create();
+    abstract public function up();
 
     /**
-     * テーブル全削除
+     * マイグレーションを元に戻す
      */
-    public function delete()
-    {
-        try {
-            $file = new \SplFileObject($this->databaseSource, 'wb');
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-            die();
-        }
-
-        $res = $file->fwrite('');
-        if ($res === false) {
-            echo "Couldn't save this file.";
-        }
-    }
+    abstract public function down();
 }

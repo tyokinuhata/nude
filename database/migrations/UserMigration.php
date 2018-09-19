@@ -11,7 +11,7 @@ class UserMigration extends Migration
         parent::__construct();
     }
 
-    public function create()
+    public function up()
     {
         $sql = 'CREATE TABLE `user` (
             `id` INTEGER PRIMARY KEY,
@@ -24,6 +24,24 @@ class UserMigration extends Migration
             $this->databaseHandle->exec($sql);
         } catch (\PDOException $e) {
             echo $e->getMessage();
+            echo $e->getTraceAsString();
+            die();
+        }
+    }
+
+    public function down()
+    {
+        try {
+            $file = new \SplFileObject($this->databaseSource, 'wb');
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            echo $e->getTraceAsString();
+            die();
+        }
+
+        $res = $file->fwrite('');
+        if ($res === false) {
+            echo "Couldn't save this file.";
             die();
         }
     }
