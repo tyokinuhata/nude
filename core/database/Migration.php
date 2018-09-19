@@ -1,16 +1,18 @@
 <?php
 
-class Migration
+namespace Core\Database;
+
+abstract class Migration
 {
-    private $fileName;
-    private $sqlite;
+    protected $fileName;
+    protected $sqlite;
 
     /**
      * CreateDatabase constructor.
      * @param string $fileName
      * DBにするファイル名の指定
      */
-    function __construct($fileName = 'database.sqlite')
+    function __construct($fileName)
     {
         $this->fileName = $fileName;
         $this->connect();
@@ -40,27 +42,12 @@ class Migration
     /**
      * テーブルの作成
      */
-    public function create()
-    {
-        $sql = 'CREATE TABLE `post` (
-            `id` INTEGER PRIMARY KEY,
-            `name` TEXT,
-            `comment` TEXT,
-            `created_at` TEXT
-	    )';
-
-        try {
-            $this->sqlite->exec($sql);
-        } catch (PDOException $e) {
-            echo $e->getMessage();
-            die();
-        }
-    }
+    abstract public function create();
 
     /**
      * テーブル全削除
      */
-    public function clear()
+    public function delete()
     {
         try {
             $file = new SplFileObject($this->fileName, 'wb');
@@ -75,8 +62,3 @@ class Migration
         }
     }
 }
-
-$migration = new Migration();
-$migration->create();
-//$migration->clear();
-$migration->close();
