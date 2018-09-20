@@ -78,7 +78,7 @@ abstract class Controller
         $tokens = $this->session->get($key, []);
         if (count($tokens) >= 10) array_shift($tokens);
 
-        $token = sha1($formName . session_id() . microtime());
+        $token = hash('sha1', $formName . session_id() . microtime());
         $tokens = $token;
 
         $this->session->set($key, $tokens);
