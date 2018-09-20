@@ -32,9 +32,9 @@ $ touch database/database.sqlite
 ### テーブル作成
 
 ```bash
-$ php database/command -a migrate // テーブルの作成
-$ php database/command -a reset   // テーブルの削除
-$ php database/command -a refresh // テーブルを削除し再度作成
+$ php database/cmd migrate      // テーブルの作成
+$ php database/cmd -a reset     // テーブルの削除
+$ php database/cmd -a refresh   // テーブルを削除し再度作成
 ```
 
 ### 鯖の起動
