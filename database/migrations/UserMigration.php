@@ -23,8 +23,8 @@ class UserMigration extends Migration
         try {
             $this->databaseHandle->exec($sql);
         } catch (\PDOException $e) {
-            echo $e->getMessage();
-            echo $e->getTraceAsString();
+            echo $e->getMessage() . "\n";
+            echo $e->getTraceAsString() . "\n";
             die();
         }
     }
@@ -34,14 +34,14 @@ class UserMigration extends Migration
         try {
             $file = new \SplFileObject($this->databaseSource, 'wb');
         } catch (\Exception $e) {
-            echo $e->getMessage();
-            echo $e->getTraceAsString();
+            echo $e->getMessage() . "\n";
+            echo $e->getTraceAsString() . "\n";
             die();
         }
 
         $res = $file->fwrite('');
         if ($res === false) {
-            echo "Couldn't save this file.";
+            echo "Couldn't save this file.\n";
             die();
         }
     }

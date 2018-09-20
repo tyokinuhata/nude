@@ -54,6 +54,6 @@ try {
         foreach ($migrations as $migration) $migration->close();
     }
 } catch (Exception $e) {
-    echo $e->getMessage();
+    echo $e->getMessage() . "\n";
     die();
 }
