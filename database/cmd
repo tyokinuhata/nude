@@ -35,13 +35,23 @@ try {
     } else {
         $files = scandir(__DIR__ . '/migrations');
         $files = preg_grep('/\.php/', $files);
+
+        // インスタンス生成
+        $migrations = [];
         foreach ($files as $file) {
             $class = str_replace('.php', '', $file);
             $object = $namespace . $class;
-            $migration = new $object();
-            foreach ($actions as $action) $migration->$action();
-            $migration->close();
+            $migrations[] = new $object();
         }
+
+        // メソッド実行
+        foreach ($actions as $action) {
+            foreach ($migrations as $migration) {
+                $migration->$action();
+            }
+        }
+
+        foreach ($migrations as $migration) $migration->close();
     }
 } catch (Exception $e) {
     echo $e->getMessage();

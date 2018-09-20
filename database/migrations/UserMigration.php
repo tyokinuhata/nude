@@ -15,9 +15,9 @@ class UserMigration extends Migration
     {
         $sql = 'CREATE TABLE `user` (
             `id` INTEGER PRIMARY KEY,
-            `user_name` TEXT NOT NULL UNIQUE,
-            `password` TEXT NOT NULL,
-            `created_at` TEXT
+            `user_name` VARCHAR(20) NOT NULL UNIQUE,
+            `password` VARCHAR(40) NOT NULL,
+            `created_at` DATETIME
 	    )';
 
         try {

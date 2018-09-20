@@ -27,6 +27,18 @@ class StatusMigration extends Migration
 
     public function down()
     {
-        // TODO: Implement down() method.
+        try {
+            $file = new \SplFileObject($this->databaseSource, 'wb');
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+            echo $e->getTraceAsString();
+            die();
+        }
+
+        $res = $file->fwrite('');
+        if ($res === false) {
+            echo "Couldn't save this file.";
+            die();
+        }
     }
 }
