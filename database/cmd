@@ -37,8 +37,8 @@ try {
         $files = preg_grep('/\.php/', $files);
         foreach ($files as $file) {
             $class = str_replace('.php', '', $file);
-            $namespace = $namespace . $class;
-            $migration = new $namespace();
+            $object = $namespace . $class;
+            $migration = new $object();
             foreach ($actions as $action) $migration->$action();
             $migration->close();
         }
