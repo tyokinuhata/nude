@@ -15,10 +15,12 @@ Nudeは脆弱性体験ツールです.
 ### 初期設定
 
 ```bash
+$ git clone https://github.com/tyokinuhata/nude.git
+$ cd nude
 $ make setup
 ```
 
-このコマンドは以下に挙げるコマンドを初期設定用にまとめたものです.  
+`make setup`は以下に挙げるコマンドを初期設定用にまとめたものです.  
 以下に挙げるコマンドは必要に応じて順次使用してください.
 
 ### DBの作成
