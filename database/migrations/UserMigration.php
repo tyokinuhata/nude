@@ -6,7 +6,7 @@ use Core\Database\Migration;
 
 class UserMigration extends Migration
 {
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
