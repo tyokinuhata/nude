@@ -6,11 +6,6 @@ use Core\Database\Migration;
 
 class UserMigration extends Migration
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
     public function up()
     {
         $sql = 'CREATE TABLE `user` (

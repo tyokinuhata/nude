@@ -8,11 +8,19 @@ abstract class Migration
     protected $databaseHandle;
 
     /**
-     * Migration constructor.
+     * コンストラクタ
      */
-    function __construct()
+    public function __construct()
     {
         $this->connect();
+    }
+
+    /**
+     * デストラクタ
+     */
+    public function __destruct()
+    {
+        $this->close();
     }
 
     /**
