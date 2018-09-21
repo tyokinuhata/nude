@@ -29,7 +29,6 @@ try {
         $namespace = $namespace . $class;
         $migration = new $namespace();
         foreach ($actions as $action) $migration->$action();
-        $migration->close();
 
     // 全てのマイグレーションを実行
     } else {
@@ -50,8 +49,6 @@ try {
                 $migration->$action();
             }
         }
-
-        foreach ($migrations as $migration) $migration->close();
     }
 } catch (Exception $e) {
     echo $e->getMessage() . "\n";
