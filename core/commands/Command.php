@@ -4,10 +4,10 @@ namespace Core\Commands;
 
 abstract class Command
 {
-    public function __construct($method, $options)
+    public function __construct($action, $options)
     {
-        $this->run($method, $options);
+        $this->run($action, $options);
     }
 
-    abstract public function run($method, $options);
+    abstract public function run($action, $options);
 }

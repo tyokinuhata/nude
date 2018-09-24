@@ -4,7 +4,8 @@ require __DIR__ . '/vendor/autoload.php';
 
 $namespace = 'Commands\\';
 $class = ucfirst(explode(':', $argv[1])[0]);
-$method = explode(':', $argv[1])[1];
+$action = explode(':', $argv[1])[1];
+$option = $argv[2];
 
-$namespace = $namespace . $class . 'Command';
-$object = new $namespace($method, 'hoge');
+$path = $namespace . $class . 'Command';
+$object = new $path($action, $option);

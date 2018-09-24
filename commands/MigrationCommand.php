@@ -6,8 +6,22 @@ use Core\Commands\Command;
 
 class MigrationCommand extends Command
 {
-    public function run($method, $options)
+    // コマンドと実際に実行するメソッドのマッピング
+    protected $mappings = [
+        'migrate' => [ 'up' ],
+        'reset' => [ 'down' ],
+        'refresh' => [ 'down', 'up' ]
+    ];
+
+    public function run($action, $class)
     {
-        echo $method, $options;
+        if (is_null($class)) {
+            // クラス取得
+        } else {
+            $namespace = 'Databases\Migrations\\' . $class;
+            $migration = new $namespace();
+            $methods = $this->mappings[$action];
+            foreach ($methods as $method) $migration->$method();
+        }
     }
 }
