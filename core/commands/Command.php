@@ -6,8 +6,8 @@ abstract class Command
 {
     public function __construct($method, $options)
     {
-        $this->run();
+        $this->run($method, $options);
     }
 
-    abstract public function run();
+    abstract public function run($method, $options);
 }

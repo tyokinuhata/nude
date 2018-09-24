@@ -5,6 +5,7 @@
       "Core\\Databases\\": "core/databases/",
       "Controllers\\": "controllers/",
       "Databases\\": "databases/",
+      "Commands\\": "commands/",
       "Models\\": "models/",
       "Views\\": "views/"
     }

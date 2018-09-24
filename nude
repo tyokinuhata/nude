@@ -1,0 +1,10 @@
+<?php
+
+require __DIR__ . '/vendor/autoload.php';
+
+$namespace = 'Commands\\';
+$class = ucfirst(explode(':', $argv[1])[0]);
+$method = explode(':', $argv[1])[1];
+
+$namespace = $namespace . $class . 'Command';
+$object = new $namespace($method, 'hoge');
