@@ -5,7 +5,7 @@ require __DIR__ . '/vendor/autoload.php';
 $namespace = 'Commands\\';
 $class = ucfirst(explode(':', $argv[1])[0]);
 $action = explode(':', $argv[1])[1];
-$option = $argv[2];
+$option = isset($argv[2]) ? $argv[2] : null;
 
 $path = $namespace . $class . 'Command';
 $object = new $path($action, $option);
