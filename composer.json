@@ -2,9 +2,9 @@
   "autoload": {
     "psr-4": {
       "Core\\": "core/",
-      "Core\\Database\\": "core/database/",
+      "Core\\Databases\\": "core/databases/",
       "Controllers\\": "controllers/",
-      "Database\\": "database/",
+      "Databases\\": "databases/",
       "Models\\": "models/",
       "Views\\": "views/"
     }

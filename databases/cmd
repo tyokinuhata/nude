@@ -11,10 +11,10 @@ $commandMaps = [
 
 try {
     // ネームスペース
-    $namespace = 'Database\Migrations\\';
+    $namespace = 'Databases\Migrations\\';
 
     // オプションの取得
-    $options = getopt('a:c::');
+    $options = getopt('a:c:');
 
     // 実行するメソッド
     if (isset($options['a'])) $actions = $commandMaps[$options['a']];

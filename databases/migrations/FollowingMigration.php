@@ -1,8 +1,8 @@
 <?php
 
-namespace Database\Migrations;
+namespace Databases\Migrations;
 
-use Core\Database\Migration;
+use Core\Databases\Migration;
 
 class FollowingMigration extends Migration
 {
