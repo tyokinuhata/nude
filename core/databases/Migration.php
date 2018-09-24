@@ -1,10 +1,10 @@
 <?php
 
-namespace Core\Database;
+namespace Core\Databases;
 
 abstract class Migration
 {
-    protected $databaseSource = __DIR__ . '/../../database/database.sqlite';
+    protected $databaseSource = __DIR__ . '/../../databases/database.sqlite';
     protected $databaseHandle;
 
     /**

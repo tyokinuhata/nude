@@ -1,4 +1,4 @@
 vendor
-database/database.sqlite
+databases/database.sqlite
 .idea
 .DS_Store

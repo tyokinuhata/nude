@@ -1,25 +1,26 @@
 <?php
 
-namespace Database\Migrations;
+namespace Databases\Migrations;
 
-use Core\Database\Migration;
+use Core\Databases\Migration;
 
-class UserMigration extends Migration
+class StatusMigration extends Migration
 {
     public function up()
     {
-        $sql = 'CREATE TABLE `user` (
+        $sql = 'CREATE TABLE `status` (
             `id` INTEGER PRIMARY KEY,
-            `user_name` VARCHAR(20) NOT NULL UNIQUE,
-            `password` VARCHAR(40) NOT NULL,
-            `created_at` DATETIME
-	    )';
+            `user_id` INTEGER NOT NULL,
+            `body` VARCHAR(255),
+            `created_at` DATETIME,
+            FOREIGN KEY (user_id) REFERENCES user(id)
+        )';
 
         try {
             $this->databaseHandle->exec($sql);
         } catch (\PDOException $e) {
-            echo $e->getMessage() . "\n";
-            echo $e->getTraceAsString() . "\n";
+            echo $e->getMessage() . "\n";;
+            echo $e->getTraceAsString() . "\n";;
             die();
         }
     }
@@ -29,8 +30,8 @@ class UserMigration extends Migration
         try {
             $file = new \SplFileObject($this->databaseSource, 'wb');
         } catch (\Exception $e) {
-            echo $e->getMessage() . "\n";
-            echo $e->getTraceAsString() . "\n";
+            echo $e->getMessage() . "\n";;
+            echo $e->getTraceAsString() . "\n";;
             die();
         }
 
