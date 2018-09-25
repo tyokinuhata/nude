@@ -1,5 +1,5 @@
 setup:
 	composer install
 	touch database/database.sqlite
-	php database/cmd -a migrate
+	php nude migration:migrate
 	php -S localhost:8000 -t public
