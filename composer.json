@@ -8,6 +8,7 @@
       "Commands\\": "commands/",
       "Models\\": "models/",
       "Views\\": "views/"
-    }
+    },
+    "files": [ "core/utils.php" ]
   }
 }
