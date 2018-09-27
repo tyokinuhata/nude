@@ -17,11 +17,11 @@ class FollowingMigration extends Migration
         )';
 
         try {
-            echo color('migrating...', 'light-green');
+            echo color('Migrating... ' . ((new \ReflectionClass($this))->getShortName()), 'light-green');
             $this->databaseHandle->exec($sql);
-            echo color('migrate success!', 'light-green');
+            echo color('Migrate success! ' . ((new \ReflectionClass($this))->getShortName()), 'light-green');
         } catch (\PDOException $e) {
-            echo color('migrate failed!', 'light-red');
+            echo color('Migrate failed! ' . ((new \ReflectionClass($this))->getShortName()), 'light-red');
             echo color($e->getMessage(), 'light-red');
             echo color($e->getTraceAsString(), 'light-red');
             die();
