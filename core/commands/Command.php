@@ -7,10 +7,6 @@ abstract class Command
     protected $name = '';
     protected $description = '';
 
-    public function __construct()
-    {
-    }
-
     public function getName()
     {
         return $this->name;

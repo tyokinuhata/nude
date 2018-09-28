@@ -8,11 +8,10 @@ class MigrationRefreshCommand extends Command
 {
     protected $name = 'migration:refresh';
 
-    protected $description = 'Refresh command';
+    protected $description = 'Migration refresh command';
 
     public function run()
     {
-
         $files = scandir(__DIR__ . '/../databases/migrations');
         $files = preg_grep('/\.php/', $files);
         $namespace = 'Databases\Migrations\\';
