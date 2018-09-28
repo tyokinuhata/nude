@@ -13,8 +13,11 @@ class MigrationCommand extends Command
         'refresh' => [ 'down', 'up' ]
     ];
 
-    public function run($action, $class)
+    public function run()
     {
+        $action = func_get_arg(0);
+        $class = func_get_arg(1);
+
         // 全てのマイグレーションを実行
         if (is_null($class)) {
             $files = scandir(__DIR__ . '/../databases/migrations');

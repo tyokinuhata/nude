@@ -3,8 +3,16 @@
 require __DIR__ . '/vendor/autoload.php';
 
 $namespace = 'Commands\\';
-$class = ucfirst(explode(':', $argv[1])[0]);
-$action = explode(':', $argv[1])[1];
+
+// :が含まれるか
+if (strpos($argv[1], ':')) {
+    $class = ucfirst(explode(':', $argv[1])[0]);
+    $action = explode(':', $argv[1])[1];
+} else {
+    $class = ucfirst($argv[1]);
+    $action = ucfirst($argv[1]);
+}
+
 $option = isset($argv[2]) ? $argv[2] : null;
 
 $path = $namespace . $class . 'Command';

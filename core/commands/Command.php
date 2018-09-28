@@ -9,5 +9,5 @@ abstract class Command
         $this->run($action, $options);
     }
 
-    abstract public function run($action, $options);
+    abstract public function run();
 }
