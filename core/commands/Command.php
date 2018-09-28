@@ -4,9 +4,21 @@ namespace Core\Commands;
 
 abstract class Command
 {
-    public function __construct($action, $options)
+    protected $name = '';
+    protected $description = '';
+
+    public function __construct()
     {
-        $this->run($action, $options);
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     abstract public function run();

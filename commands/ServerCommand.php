@@ -6,6 +6,10 @@ use Core\Commands\Command;
 
 class ServerCommand extends Command
 {
+    protected $name = 'server';
+
+    protected $description = 'Nude server command';
+
     public function run()
     {
         echo color('Nude server started!', 'light-green');

@@ -2,39 +2,15 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-// コマンド一覧
-$commands = [
-    'migration' => [
-        'migrate',
-        'reset',
-        'refresh'
-    ],
-    'server' => [
-        'server'
-    ],
-];
+use Commands\Kernel;
 
-// :が含まれるか
-if (strpos($argv[1], ':')) {
-    $class = ucfirst(explode(':', $argv[1])[0]);
-    $action = explode(':', $argv[1])[1];
-} else {
-    $class = ucfirst($argv[1]);
-    $action = ucfirst($argv[1]);
-}
-
-// オプションがあるかどうか
-$option = isset($argv[2]) ? $argv[2] : null;
-
-// コマンドが登録されていれば実行
-if (!isset($commands[strtolower($class)])) {
-    echo color('Command not found.', 'light-red');
-    die();
-}
-foreach ($commands[strtolower($class)] as $command) {
-    if ($command === $action) {
-        $namespace = 'Commands\\' . $class . 'Command';
-        $object = new $namespace($action, $option);
+$kernel = new Kernel();
+$commands = $kernel->getCommands();
+foreach ($commands as $command) {
+    $commandObj = new $command();
+    $commandName = $commandObj->getName();
+    if ($commandName === $argv[1]) {
+        isset($argv[2]) ? $commandObj->run($argv[2]) : $commandObj->run();
         exit();
     }
 }
