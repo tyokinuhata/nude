@@ -2,7 +2,17 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$namespace = 'Commands\\';
+// コマンド一覧
+$commands = [
+    'migration' => [
+        'migrate',
+        'reset',
+        'refresh'
+    ],
+    'server' => [
+        'server'
+    ],
+];
 
 // :が含まれるか
 if (strpos($argv[1], ':')) {
@@ -13,7 +23,19 @@ if (strpos($argv[1], ':')) {
     $action = ucfirst($argv[1]);
 }
 
+// オプションがあるかどうか
 $option = isset($argv[2]) ? $argv[2] : null;
 
-$path = $namespace . $class . 'Command';
-$object = new $path($action, $option);
+// コマンドが登録されていれば実行
+if (!isset($commands[strtolower($class)])) {
+    echo color('Command not found.', 'light-red');
+    die();
+}
+foreach ($commands[strtolower($class)] as $command) {
+    if ($command === $action) {
+        $namespace = 'Commands\\' . $class . 'Command';
+        $object = new $namespace($action, $option);
+        exit();
+    }
+}
+echo color('Command not found.', 'light-red');
