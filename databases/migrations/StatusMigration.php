@@ -16,31 +16,35 @@ class StatusMigration extends Migration
             FOREIGN KEY (user_id) REFERENCES user(id)
         )';
 
+        $className = (new \ReflectionClass($this))->getShortName();
         try {
-            echo color('Migrating... ' . ((new \ReflectionClass($this))->getShortName()), 'light-green');
+            color('Migrating... ' . $className, 'light-green');
             $this->databaseHandle->exec($sql);
-            echo color('Migrate success! ' . ((new \ReflectionClass($this))->getShortName()), 'light-green');
+            color('Migrate success! ' . $className, 'light-green');
         } catch (\PDOException $e) {
-            echo color('Migrate failed! ' . ((new \ReflectionClass($this))->getShortName()), 'light-red');
-            echo color($e->getMessage(), 'light-red');
-            echo color($e->getTraceAsString(), 'light-red');
+            color('Migrate failed! ' . $className, 'light-red');
+            color($e->getMessage(), 'light-red');
+            color($e->getTraceAsString(), 'light-red');
             die();
         }
     }
 
     public function down()
     {
+        $className = (new \ReflectionClass($this))->getShortName();
         try {
+            color('Rollback now... ' . $className, 'light-green');
             $file = new \SplFileObject($this->databaseSource, 'wb');
+            color('Rollback success! ' . $className, 'light-green');
         } catch (\Exception $e) {
-            echo $e->getMessage() . "\n";;
-            echo $e->getTraceAsString() . "\n";;
+            color($e->getMessage(), 'light-red');
+            color($e->getTraceAsString(), 'light-red');
             die();
         }
 
         $res = $file->fwrite('');
         if ($res === false) {
-            echo "Couldn't save this file.\n";
+            color("Couldn't save this file.", 'light-red');
             die();
         }
     }

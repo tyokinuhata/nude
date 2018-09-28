@@ -12,7 +12,7 @@ class ServerCommand extends Command
 
     public function run()
     {
-        echo color('Nude server started!', 'light-green');
+        color('Nude server started!', 'light-green');
         exec('php -S localhost:8000 -t public');
     }
 }

@@ -32,5 +32,5 @@ function color($str, $color = 'white')
     $color = strtolower($color);
     if (!isset($colors[$color])) return false;
 
-    return "\033[$colors[$color]m$str\033[0m\n";
+    echo "\033[$colors[$color]m$str\033[0m\n";
 }

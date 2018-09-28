@@ -14,4 +14,4 @@ foreach ($commands as $command) {
         exit();
     }
 }
-echo color('Command not found.', 'light-red');
+color('Command not found.', 'light-red');
