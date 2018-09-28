@@ -40,5 +40,5 @@ $ php nude migration:refresh   // テーブルを削除し再度作成
 ### 鯖の起動
 
 ```bash
-$ php -S localhost:8000 -t public
+$ php nude server
 ```
