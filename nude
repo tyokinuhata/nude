@@ -2,16 +2,4 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-use Commands\Kernel;
-
-$kernel = new Kernel();
-$commands = $kernel->getCommands();
-foreach ($commands as $command) {
-    $commandObj = new $command();
-    $commandName = $commandObj->getName();
-    if ($commandName === $argv[1]) {
-        isset($argv[2]) ? $commandObj->run($argv[2]) : $commandObj->run();
-        exit();
-    }
-}
-color('Command not found.', 'light-red');
+$kernel = new Commands\Kernel($argv);

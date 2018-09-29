@@ -11,8 +11,16 @@ class Kernel
         MigrationRefreshCommand::class,
     ];
 
-    public function getCommands()
+    public function __construct($argv)
     {
-        return $this->commands;
+        foreach ($this->commands as $command) {
+            $commandObj = new $command();
+            $commandName = $commandObj->getName();
+            if ($commandName === $argv[1]) {
+                isset($argv[2]) ? $commandObj->run($argv[2]) : $commandObj->run();
+                exit();
+            }
+        }
+        color('Command not found.', 'light-red');
     }
 }
