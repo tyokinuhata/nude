@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * マイグレーションのロールバック用コマンド
+ */
+
 namespace Commands;
 
 use Core\Commands\Command;

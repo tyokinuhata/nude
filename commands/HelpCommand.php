@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * コマンドのヘルプ表示
+ */
+
 namespace Commands;
 
 use Core\Commands\Command;

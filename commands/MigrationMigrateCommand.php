@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * マイグレーション実行コマンド
+ */
+
 namespace Commands;
 
 use Core\Commands\Command;

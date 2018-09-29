@@ -4,6 +4,10 @@ namespace Commands;
 
 class Kernel
 {
+    /**
+     * @var array
+     * コマンド一覧
+     */
     private $commands = [
         HelpCommand::class,
         ServerCommand::class,
@@ -12,6 +16,11 @@ class Kernel
         MigrationRefreshCommand::class,
     ];
 
+    /**
+     * Kernel constructor.
+     * @param null $argv
+     * コマンド実行処理
+     */
     public function __construct($argv = null)
     {
         foreach ($this->getCommands() as $command) {
@@ -25,6 +34,10 @@ class Kernel
         color('Command not found.', 'light-red');
     }
 
+    /**
+     * @return array
+     * コマンド一覧を取得
+     */
     public function getCommands()
     {
         return $this->commands;

@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * 鯖起動コマンド
+ */
+
 namespace Commands;
 
 use Core\Commands\Command;
