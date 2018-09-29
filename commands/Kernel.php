@@ -17,17 +17,16 @@ class Kernel
     ];
 
     /**
-     * Kernel constructor.
      * @param null $argv
      * コマンド実行処理
      */
-    public function __construct($argv = null)
+    public function run($argv = null)
     {
         foreach ($this->getCommands() as $command) {
             $commandObj = new $command();
             $commandName = $commandObj->getName();
             if ($commandName === $argv[1]) {
-                isset($argv[2]) ? $commandObj->run($argv[2]) : $commandObj->run();
+                isset($argv[2]) ? $commandObj->handle($argv[2]) : $commandObj->handle();
                 exit();
             }
         }

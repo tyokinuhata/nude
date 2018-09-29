@@ -14,7 +14,7 @@ class MigrationMigrateCommand extends Command
 
     protected $description = 'Migrate command';
 
-    public function run($class = null)
+    public function handle($class = null)
     {
         // 特定のマイグレーションのみ実行
         if (!is_null($class)) {

@@ -29,5 +29,5 @@ abstract class Command
      * @return mixed
      * コマンドの処理
      */
-    abstract public function run();
+    abstract public function handle();
 }

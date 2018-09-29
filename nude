@@ -2,4 +2,4 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
-$kernel = new Commands\Kernel($argv);
+(new Commands\Kernel())->run($argv);

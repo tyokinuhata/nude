@@ -14,7 +14,7 @@ class MigrationResetCommand extends Command
 
     protected $description = 'Migration reset command';
 
-    public function run($class = null)
+    public function handle($class = null)
     {
         // 特定のマイグレーションのみ実行
         if (!is_null($class)) {

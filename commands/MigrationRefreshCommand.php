@@ -14,7 +14,7 @@ class MigrationRefreshCommand extends Command
 
     protected $description = 'Migration refresh command';
 
-    public function run()
+    public function handle()
     {
         $files = scandir(__DIR__ . '/../databases/migrations');
         $files = preg_grep('/\.php/', $files);
