@@ -5,15 +5,16 @@ namespace Commands;
 class Kernel
 {
     private $commands = [
+        HelpCommand::class,
         ServerCommand::class,
         MigrationMigrateCommand::class,
         MigrationResetCommand::class,
         MigrationRefreshCommand::class,
     ];
 
-    public function __construct($argv)
+    public function __construct($argv = null)
     {
-        foreach ($this->commands as $command) {
+        foreach ($this->getCommands() as $command) {
             $commandObj = new $command();
             $commandName = $commandObj->getName();
             if ($commandName === $argv[1]) {
@@ -22,5 +23,10 @@ class Kernel
             }
         }
         color('Command not found.', 'light-red');
+    }
+
+    public function getCommands()
+    {
+        return $this->commands;
     }
 }
