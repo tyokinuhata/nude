@@ -10,9 +10,9 @@ class ServerCommand extends Command
 
     protected $description = 'Nude server command';
 
-    public function run()
+    public function run($port = 8000)
     {
-        color('Nude server started!', 'light-green');
-        exec('php -S localhost:8000 -t public');
+        color("Nude server started on port localhost:$port", 'light-green');
+        exec("php -S localhost:$port -t public");
     }
 }
