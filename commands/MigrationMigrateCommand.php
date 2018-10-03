@@ -18,22 +18,23 @@ class MigrationMigrateCommand extends Command
     {
         // 特定のマイグレーションのみ実行
         if (!is_null($class)) {
-            $namespace = 'Databases\Migrations\\' . $class;
-            $migration = new $namespace();
-            $migration->up();
+            $this->run('Databases\Migrations\\' . $class);
         }
         // 全てのマイグレーションを実行
         else {
             $files = scandir(__DIR__ . '/../databases/migrations');
             $files = preg_grep('/\.php/', $files);
-            $namespace = 'Databases\Migrations\\';
 
             foreach ($files as $file) {
                 $class = str_replace('.php', '', $file);
-                $path = $namespace . $class;
-                $migration = new $path();
-                $migration->up();
+                $this->run('Databases\Migrations\\' . $class);
             }
         }
+    }
+
+    private function run($namespace)
+    {
+        $migration = new $namespace();
+        $migration->up();
     }
 }
